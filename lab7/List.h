@@ -12,7 +12,7 @@ public:
     void Add(int data);
     void Remove(int index_i);
     item *GetItem(int index);
-    void insert(item *data, int index);
+    void Insert(int data, int index);
     int Coutn();
     void Clear();
     int GetIndex(item *data);

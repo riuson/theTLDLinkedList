@@ -80,15 +80,38 @@ item *List::GetItem(int index_i)
     return tmp;
 }
 
-void List::insert(item *data, int index_i)
+void List::Insert(int data, int index_i)
 {
-    item *tmp = head;
+    if (index_i < 0) {
+        return;
+    }
 
-    for (int i = index_i; i > 1; i--, tmp = tmp->next);
+    item *tmp = this->GetItem(index_i);
 
-    data->next = tmp->next;
-    data->prev = tmp;
-    tmp->next = data;
+    if (tmp == nullptr) {
+        this->Add(data);
+        return;
+    }
+
+    item *prev = tmp->prev;
+    item *next = tmp->next;
+
+    item *newItem = new item();
+    newItem->data = data;
+    newItem->next = next;
+    newItem->prev = prev;
+
+    if (prev != nullptr) {
+        prev->next = newItem;
+    } else {
+        head = newItem;
+    }
+
+    if (next != nullptr) {
+        next->prev = newItem;
+    } else {
+        tail = newItem;
+    }
 }
 
 int List::Coutn()
