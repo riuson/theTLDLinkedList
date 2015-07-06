@@ -5,23 +5,23 @@ List::List()
 {
 	
 	head = nullptr;
+	tail = nullptr;
 }
 
 void List::Add(int data){
-	auto newnode = new item;
-	newnode->data = data;
 	if (head == nullptr)
 	{
-		newnode->next = newnode;
-		newnode->prev = newnode;
-		head = newnode;
+		head = new item();
+		head->data = data;
+		head->next = head;
+		head->prev = head;
 		tail = head;
-		tail->next = head;
-		tail->prev = head;
 		std::cout << "head = " << data << std::endl;
 	}
 	else
 	{
+		item *newnode = new item();
+		newnode->data = data;
 		tail->next = newnode;
 		std::cout << "add = " << data << std::endl;
 		tail = tail->next;
@@ -59,11 +59,9 @@ item List::GetItem(int index_i)
 
 item List::Remove(int index_i)
 {
-	if (head == nullptr) return *head;
+	//if (head == nullptr) return ;
 	if (head->next == head)
 	{
-		//delete head;
-		//head == nullptr;
 		return *head;
 	}
 	else{
@@ -121,9 +119,7 @@ int List::GetIndex(item* data)
 		coutn_i++;
 	} while (tmp != tail);
 	return 0;
-	
 }
-
 
 void List::View()
 {
@@ -139,4 +135,16 @@ void List::View()
 
 List::~List()
 {
+	while (head != tail)
+	{
+		item *tmp = head;
+		std::cout << "delete " << tmp->data << std::endl;
+		head = head->next;
+		delete tmp;
+	}
+	item *tmp = head;
+	std::cout << "delete " << tmp->data << std::endl;
+	delete tmp;
+	head = nullptr;
+	tail = nullptr;
 }

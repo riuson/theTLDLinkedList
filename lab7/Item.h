@@ -2,6 +2,6 @@
 
 struct item{
 	int data;
-	item* next;
-	item* prev;
+	item* next = nullptr;
+	item* prev = nullptr;
 };
