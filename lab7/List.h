@@ -10,11 +10,10 @@ private:
 public:
     List();
     void Add(int data);
-    void Delete(int index_i);
-    item GetItem(int index);
-    item Remove(int index);
-    void insert(item *data, int index);
-    int Coutn();
+    void Remove(int index_i);
+    item *GetItem(int index);
+    void Insert(int data, int index);
+    int Count();
     void Clear();
     int GetIndex(item *data);
     void View();
