@@ -5,17 +5,17 @@
 class List
 {
 private:
-    item *_head;
-    item *_tail;
+    Item *_head;
+    Item *_tail;
 public:
     List();
     void Add(int data);
     void Remove(int index_i);
-    item *GetItem(int index);
+    Item *GetItem(int index);
     void Insert(int data, int index);
     int Count();
     void Clear();
-    int GetIndex(item *data);
+    int GetIndex(Item *data);
     void View();
     ~List();
 };
