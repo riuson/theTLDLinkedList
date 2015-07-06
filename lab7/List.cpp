@@ -7,6 +7,11 @@ List::List()
     this->_tail = nullptr;
 }
 
+List::~List()
+{
+    this->Clear();
+}
+
 void List::Add(int value)
 {
     if (this->_head == nullptr) {
@@ -185,9 +190,4 @@ void List::View()
         std::cout << tmp->data << std::endl;
         tmp = tmp->next;
     }
-}
-
-List::~List()
-{
-    this->Clear();
 }

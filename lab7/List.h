@@ -7,8 +7,11 @@ class List
 private:
     Item *_head;
     Item *_tail;
+
 public:
     List();
+    ~List();
+
     void Add(int value);
     bool Remove(int index);
     Item *GetItem(int index);
@@ -17,5 +20,4 @@ public:
     void Clear();
     int GetIndex(Item *data);
     void View();
-    ~List();
 };
