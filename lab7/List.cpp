@@ -31,7 +31,7 @@ void List::Add(int data)
     }
 }
 
-void List::Delete(int index_i)
+void List::Remove(int index_i)
 {
     item *tmp = this->GetItem(index_i);
 
@@ -78,25 +78,6 @@ item *List::GetItem(int index_i)
 
     std::cout << index_i << "element =" << tmp->data << std::endl;
     return tmp;
-}
-
-item List::Remove(int index_i)
-{
-    //if (head == nullptr) return ;
-    if (head->next == head) {
-        return *head;
-    } else {
-        item *tmp = head;
-
-        for (auto i = index_i; i > 1; i--, tmp = tmp->next);
-
-        tmp->prev->next = tmp->next;
-        tmp->next->prev = tmp->prev;
-        int k = tmp->data;
-        std::cout << "delete = " << k << std::endl;
-        //delete tmp;
-        return *tmp;
-    }
 }
 
 void List::insert(item *data, int index_i)
