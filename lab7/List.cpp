@@ -146,22 +146,26 @@ void List::Clear()
 int List::GetIndex(item *data)
 {
     if (head == nullptr) {
-        return 0;
+        return -1;
+    }
+
+    if (data == nullptr) {
+        return -1;
     }
 
     item *tmp = head;
-    int coutn_i = 1;
+    int count_i = 0;
 
-    do {
+    while (tmp != nullptr) {
         if (tmp == data) {
-            return coutn_i;
+            return count_i;
         }
 
         tmp = tmp->next;
-        coutn_i++;
-    } while (tmp != tail);
+        count_i++;
+    }
 
-    return 0;
+    return -1;
 }
 
 void List::View()
