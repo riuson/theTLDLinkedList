@@ -170,18 +170,19 @@ int List::GetIndex(item *data)
 
 void List::View()
 {
-    std::cout << "ALL =" << std::endl;
+    std::cout << "ALL = " << std::endl;
 
     if (head == nullptr) {
+        std::cout << "empty" << std::endl;
         return;
     }
 
     item *tmp = head;
 
-    do {
+    while (tmp != nullptr) {
         std::cout << tmp->data << std::endl;
         tmp = tmp->next;
-    } while (tmp != head);
+    }
 }
 
 List::~List()
