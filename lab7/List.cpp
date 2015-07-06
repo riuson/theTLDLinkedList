@@ -114,22 +114,17 @@ void List::Insert(int data, int index_i)
     }
 }
 
-int List::Coutn()
+int List::Count()
 {
-    int coutn_i = 0;
-
-    if (head == nullptr) {
-        return 0;
-    }
-
+    int count_i = 0;
     item *tmp = head;
 
-    do {
-        coutn_i++;
+    while (tmp != nullptr) {
         tmp = tmp->next;
-    } while (tmp != head);
+        count_i++;
+    };
 
-    return coutn_i;
+    return count_i;
 }
 
 void List::Clear()
