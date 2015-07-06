@@ -33,24 +33,34 @@ void List::Add(int data)
 
 void List::Delete(int index_i)
 {
-    if (head == nullptr ) {
+    item *tmp = this->GetItem(index_i);
+
+    if (tmp == nullptr) {
         return;
     }
 
-    if (head->next == head) {
-        delete head;
-        head = nullptr;
-    } else {
-        item *tmp = head;
+    item *prev = tmp->prev;
+    item *next = tmp->next;
 
-        for (int i = index_i; i > 1; i--, tmp = tmp->next);
-
-        tmp->prev->next = tmp->next;
-        tmp->next->prev = tmp->prev;
-        int k = tmp->data;
-        std::cout << "delete = " << k << std::endl;
-        delete tmp;
+    if (tmp == head) {
+        head = next;
     }
+
+    if (tmp == tail) {
+        tail = prev;
+    }
+
+    if (prev != nullptr) {
+        prev->next = next;
+    }
+
+    if (next != nullptr) {
+        next->prev = prev;
+    }
+
+    std::cout << "delete = " << tmp->data << std::endl;
+
+    delete tmp;
 }
 
 item *List::GetItem(int index_i)
