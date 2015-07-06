@@ -7,32 +7,31 @@ List::List()
     this->_tail = nullptr;
 }
 
-void List::Add(int data)
+void List::Add(int value)
 {
     if (this->_head == nullptr) {
         Item *newnode = new Item();
-        newnode->data = data;
+        newnode->data = value;
 
         this->_head = newnode;
-        this->_head->data = data;
         this->_tail = this->_head;
 
-        std::cout << "head = " << data << std::endl;
+        std::cout << "head = " << newnode->data << std::endl;
     } else {
         Item *newnode = new Item();
-        newnode->data = data;
+        newnode->data = value;
 
         newnode->prev = this->_tail;
         this->_tail->next = newnode;
         this->_tail = newnode;
 
-        std::cout << "add = " << data << std::endl;
+        std::cout << "add = " << newnode->data << std::endl;
     }
 }
 
-void List::Remove(int index_i)
+void List::Remove(int index)
 {
-    Item *tmp = this->GetItem(index_i);
+    Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
         return;
@@ -62,33 +61,33 @@ void List::Remove(int index_i)
     delete tmp;
 }
 
-Item *List::GetItem(int index_i)
+Item *List::GetItem(int index)
 {
     Item *tmp = this->_head;
 
-    for (int i = 0; (i < index_i) && (tmp != nullptr); i++) {
+    for (int i = 0; (i < index) && (tmp != nullptr); i++) {
         tmp = tmp->next;
     }
 
     if (tmp == nullptr) {
-        std::cout << index_i << "element not found" << std::endl;
+        std::cout << index << "element not found" << std::endl;
         return tmp;
     }
 
-    std::cout << index_i << "element =" << tmp->data << std::endl;
+    std::cout << index << "element =" << tmp->data << std::endl;
     return tmp;
 }
 
-void List::Insert(int data, int index_i)
+void List::Insert(int value, int index)
 {
-    if (index_i < 0) {
+    if (index < 0) {
         return;
     }
 
-    Item *tmp = this->GetItem(index_i);
+    Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
-        this->Add(data);
+        this->Add(value);
         return;
     }
 
@@ -96,7 +95,7 @@ void List::Insert(int data, int index_i)
     Item *next = tmp->next;
 
     Item *newItem = new Item();
-    newItem->data = data;
+    newItem->data = value;
     newItem->next = next;
     newItem->prev = prev;
 

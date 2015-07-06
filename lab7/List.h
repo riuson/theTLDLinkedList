@@ -9,10 +9,10 @@ private:
     Item *_tail;
 public:
     List();
-    void Add(int data);
-    void Remove(int index_i);
+    void Add(int value);
+    void Remove(int index);
     Item *GetItem(int index);
-    void Insert(int data, int index);
+    void Insert(int value, int index);
     int Count();
     void Clear();
     int GetIndex(Item *data);
