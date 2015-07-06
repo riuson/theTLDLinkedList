@@ -1,11 +1,11 @@
 #include <iostream>
 
-struct item {
+struct Item {
     int data;
-    item *next = nullptr;
-    item *prev = nullptr;
+    Item *next = nullptr;
+    Item *prev = nullptr;
 
-    item()
+    Item()
     {
         this->next = nullptr;
         this->prev = nullptr;

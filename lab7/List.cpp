@@ -3,51 +3,54 @@
 
 List::List()
 {
-
-    head = nullptr;
-    tail = nullptr;
+    this->_head = nullptr;
+    this->_tail = nullptr;
 }
 
-void List::Add(int data)
+List::~List()
 {
-    if (head == nullptr) {
-        item *newnode = new item();
-        newnode->data = data;
+    this->Clear();
+}
 
-        head = newnode;
-        head->data = data;
-        tail = head;
+void List::Add(int value)
+{
+    if (this->_head == nullptr) {
+        Item *newnode = new Item();
+        newnode->data = value;
 
-        std::cout << "head = " << data << std::endl;
+        this->_head = newnode;
+        this->_tail = this->_head;
+
+        std::cout << "head = " << newnode->data << std::endl;
     } else {
-        item *newnode = new item();
-        newnode->data = data;
+        Item *newnode = new Item();
+        newnode->data = value;
 
-        newnode->prev = tail;
-        tail->next = newnode;
-        tail = newnode;
+        newnode->prev = this->_tail;
+        this->_tail->next = newnode;
+        this->_tail = newnode;
 
-        std::cout << "add = " << data << std::endl;
+        std::cout << "add = " << newnode->data << std::endl;
     }
 }
 
-void List::Remove(int index_i)
+bool List::Remove(int index)
 {
-    item *tmp = this->GetItem(index_i);
+    Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
-        return;
+        return false;
     }
 
-    item *prev = tmp->prev;
-    item *next = tmp->next;
+    Item *prev = tmp->prev;
+    Item *next = tmp->next;
 
-    if (tmp == head) {
-        head = next;
+    if (tmp == this->_head) {
+        this->_head = next;
     }
 
-    if (tmp == tail) {
-        tail = prev;
+    if (tmp == this->_tail) {
+        this->_tail = prev;
     }
 
     if (prev != nullptr) {
@@ -61,63 +64,67 @@ void List::Remove(int index_i)
     std::cout << "delete = " << tmp->data << std::endl;
 
     delete tmp;
+
+    return true;
 }
 
-item *List::GetItem(int index_i)
+Item *List::GetItem(int index)
 {
-    item *tmp = head;
+    Item *tmp = this->_head;
 
-    for (int i = 0; (i < index_i) && (tmp != nullptr); i++) {
+    for (int i = 0; (i < index) && (tmp != nullptr); i++) {
         tmp = tmp->next;
     }
 
     if (tmp == nullptr) {
-        std::cout << index_i << "element not found" << std::endl;
+        std::cout << index << "element not found" << std::endl;
         return tmp;
     }
 
-    std::cout << index_i << "element =" << tmp->data << std::endl;
+    std::cout << index << "element =" << tmp->data << std::endl;
     return tmp;
 }
 
-void List::Insert(int data, int index_i)
+bool List::Insert(int value, int index)
 {
-    if (index_i < 0) {
-        return;
+    if (index < 0) {
+        return false;
     }
 
-    item *tmp = this->GetItem(index_i);
+    Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
-        this->Add(data);
-        return;
+        this->Add(value);
+        return true;
     }
 
-    item *prev = tmp->prev;
-    item *next = tmp->next;
+    Item *prev = tmp->prev;
+    Item *next = tmp->next;
 
-    item *newItem = new item();
-    newItem->data = data;
+    Item *newItem = new Item();
+    newItem->data = value;
     newItem->next = next;
     newItem->prev = prev;
 
     if (prev != nullptr) {
         prev->next = newItem;
     } else {
-        head = newItem;
+        this->_head = newItem;
     }
 
     if (next != nullptr) {
         next->prev = newItem;
     } else {
-        tail = newItem;
+        this->_tail = newItem;
     }
+
+    return true;
 }
 
 int List::Count()
 {
     int count_i = 0;
-    item *tmp = head;
+    Item *tmp = this->_head;
 
     while (tmp != nullptr) {
         tmp = tmp->next;
@@ -129,12 +136,12 @@ int List::Count()
 
 void List::Clear()
 {
-    item *tmp = head;
-    this->head = nullptr;
-    this->tail = nullptr;
+    Item *tmp = this->_head;
+    this->_head = nullptr;
+    this->_tail = nullptr;
 
     while (tmp != nullptr) {
-        item *del = tmp;
+        Item *del = tmp;
         tmp = tmp->next;
 
         std::cout  << "delete element = " << del->data << std::endl;
@@ -143,9 +150,9 @@ void List::Clear()
     }
 }
 
-int List::GetIndex(item *data)
+int List::GetIndex(Item *data)
 {
-    if (head == nullptr) {
+    if (this->_head == nullptr) {
         return -1;
     }
 
@@ -153,7 +160,7 @@ int List::GetIndex(item *data)
         return -1;
     }
 
-    item *tmp = head;
+    Item *tmp = this->_head;
     int count_i = 0;
 
     while (tmp != nullptr) {
@@ -172,20 +179,15 @@ void List::View()
 {
     std::cout << "ALL = " << std::endl;
 
-    if (head == nullptr) {
+    if (this->_head == nullptr) {
         std::cout << "empty" << std::endl;
         return;
     }
 
-    item *tmp = head;
+    Item *tmp = this->_head;
 
     while (tmp != nullptr) {
         std::cout << tmp->data << std::endl;
         tmp = tmp->next;
     }
-}
-
-List::~List()
-{
-    this->Clear();
 }
