@@ -29,12 +29,12 @@ void List::Add(int value)
     }
 }
 
-void List::Remove(int index)
+bool List::Remove(int index)
 {
     Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
-        return;
+        return false;
     }
 
     Item *prev = tmp->prev;
@@ -59,6 +59,8 @@ void List::Remove(int index)
     std::cout << "delete = " << tmp->data << std::endl;
 
     delete tmp;
+
+    return true;
 }
 
 Item *List::GetItem(int index)
@@ -78,17 +80,17 @@ Item *List::GetItem(int index)
     return tmp;
 }
 
-void List::Insert(int value, int index)
+bool List::Insert(int value, int index)
 {
     if (index < 0) {
-        return;
+        return false;
     }
 
     Item *tmp = this->GetItem(index);
 
     if (tmp == nullptr) {
         this->Add(value);
-        return;
+        return true;
     }
 
     Item *prev = tmp->prev;
@@ -110,6 +112,8 @@ void List::Insert(int value, int index)
     } else {
         this->_tail = newItem;
     }
+
+    return true;
 }
 
 int List::Count()

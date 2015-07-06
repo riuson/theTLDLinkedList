@@ -10,9 +10,9 @@ private:
 public:
     List();
     void Add(int value);
-    void Remove(int index);
+    bool Remove(int index);
     Item *GetItem(int index);
-    void Insert(int value, int index);
+    bool Insert(int value, int index);
     int Count();
     void Clear();
     int GetIndex(Item *data);
