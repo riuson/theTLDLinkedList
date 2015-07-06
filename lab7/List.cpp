@@ -50,14 +50,21 @@ void List::Delete(int index_i)
     }
 }
 
-item List::GetItem(int index_i)
+item *List::GetItem(int index_i)
 {
     item *tmp = head;
 
-    for (int i = index_i; i > 1; i--, tmp = tmp->next);
+    for (int i = 0; (i < index_i) && (tmp != nullptr); i++) {
+        tmp = tmp->next;
+    }
+
+    if (tmp == nullptr) {
+        std::cout << index_i << "element not found" << std::endl;
+        return tmp;
+    }
 
     std::cout << index_i << "element =" << tmp->data << std::endl;
-    return *tmp;
+    return tmp;
 }
 
 item List::Remove(int index_i)
