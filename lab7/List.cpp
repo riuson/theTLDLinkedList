@@ -129,16 +129,18 @@ int List::Count()
 
 void List::Clear()
 {
-    if (head == nullptr) {
-        return;
-    }
+    item *tmp = head;
+    this->head = nullptr;
+    this->tail = nullptr;
 
-    for (item *tmp = head->next; tmp != head; tmp = tmp->next) {
-        delete tmp;
-    }
+    while (tmp != nullptr) {
+        item *del = tmp;
+        tmp = tmp->next;
 
-    delete head;
-    head = nullptr;
+        std::cout  << "delete element = " << del->data << std::endl;
+
+        delete del;
+    }
 }
 
 int List::GetIndex(item *data)
@@ -180,16 +182,5 @@ void List::View()
 
 List::~List()
 {
-    while (head != tail) {
-        item *tmp = head;
-        std::cout << "delete " << tmp->data << std::endl;
-        head = head->next;
-        delete tmp;
-    }
-
-    item *tmp = head;
-    std::cout << "delete " << tmp->data << std::endl;
-    delete tmp;
-    head = nullptr;
-    tail = nullptr;
+    this->Clear();
 }
