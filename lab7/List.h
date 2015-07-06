@@ -5,8 +5,8 @@
 class List
 {
 private:
-    item *head;
-    item *tail;
+    item *_head;
+    item *_tail;
 public:
     List();
     void Add(int data);
