@@ -11,20 +11,23 @@ List::List()
 void List::Add(int data)
 {
     if (head == nullptr) {
-        head = new item();
+        item *newnode = new item();
+        newnode->data = data;
+
+        head = newnode;
         head->data = data;
-        head->next = head;
-        head->prev = head;
         tail = head;
+
         std::cout << "head = " << data << std::endl;
     } else {
         item *newnode = new item();
         newnode->data = data;
+
+        newnode->prev = tail;
         tail->next = newnode;
+        tail = newnode;
+
         std::cout << "add = " << data << std::endl;
-        tail = tail->next;
-        tail->next = head;
-        tail->prev = head;
     }
 }
 
